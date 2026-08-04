@@ -43,7 +43,7 @@ jobs:
           WINDOWS_CERTIFICATE_FILE: ${{ runner.temp }}/certificate.pfx
           WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
           LIVE_TRANSLATE_UPDATE_URL: ${{ vars.LIVE_TRANSLATE_UPDATE_URL }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: live-translate-${{ runner.os }}-${{ matrix.arch }}
           path: out/make/**

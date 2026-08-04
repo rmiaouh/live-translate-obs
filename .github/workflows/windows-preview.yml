@@ -34,7 +34,7 @@ jobs:
           "$hash  $($installer.Name)" | Set-Content -Encoding ascii $checksum
           "path=$($installer.FullName)" >> $env:GITHUB_OUTPUT
           "checksum=$checksum" >> $env:GITHUB_OUTPUT
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: live-translate-obs-windows-x64-preview
           path: out/make/**
