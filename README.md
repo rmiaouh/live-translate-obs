@@ -2,6 +2,9 @@
 
 Live Translate for OBS is a local Windows and macOS application that turns microphone and system audio into translated captions for an OBS Browser Source. Audio streams directly from the Electron renderer to OpenAI Realtime Translation. There is no application account or hosted transcript backend.
 
+<img width="1285" height="826" alt="Capture d’écran 2026-08-04 à 22 20 06" src="https://github.com/user-attachments/assets/66754dc1-2069-4299-8f20-f6bc6c768d2f" />
+
+
 ## Current preview
 
 The current Windows test build is [`v0.2.0-preview.4`](https://github.com/rmiaouh/live-translate-obs/releases/tag/v0.2.0-preview.4). It is unsigned and intended for testing. Its Windows installer is built from the tagged commit by GitHub Actions and published with a SHA-256 checksum.
