@@ -1,0 +1,14 @@
+node_modules/
+.vite/
+out/
+coverage/
+dist/
+*.log
+.DS_Store
+resources/overlay/fonts/
+resources/overlay-dist/
+native/windows-audio-capture/bin/
+native/windows-audio-capture/obj/
+.env
+.env.*
+!.env.example
