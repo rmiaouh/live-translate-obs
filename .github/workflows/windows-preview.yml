@@ -1,0 +1,48 @@
+name: Windows preview installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['main']
+    tags: ['v*-preview.*']
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows-preview:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run make -- --platform=win32 --arch=x64
+      - name: Create checksum
+        id: installer
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem -Path out/make -Recurse -Filter '*Setup.exe' | Select-Object -First 1
+          if (-not $installer) { throw 'Windows installer was not generated.' }
+          $hash = (Get-FileHash -Algorithm SHA256 $installer.FullName).Hash.ToLowerInvariant()
+          $checksum = "$($installer.FullName).sha256"
+          "$hash  $($installer.Name)" | Set-Content -Encoding ascii $checksum
+          "path=$($installer.FullName)" >> $env:GITHUB_OUTPUT
+          "checksum=$checksum" >> $env:GITHUB_OUTPUT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: live-translate-obs-windows-x64-preview
+          path: out/make/**
+          if-no-files-found: error
+          retention-days: 14
+      - name: Publish preview release
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ github.ref_name }}" "${{ steps.installer.outputs.path }}" "${{ steps.installer.outputs.checksum }}" --prerelease --generate-notes --title "Live Translate for OBS ${{ github.ref_name }}"

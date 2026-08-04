@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
+  <title id="title">Live Translate for OBS</title>
+  <rect width="1024" height="1024" rx="216" fill="#071113"/>
+  <path d="M232 262h96v500h-96zM464 356h96v406h-96zM696 196h96v566h-96z" fill="#FFB545"/>
+  <path d="M160 820h704" fill="none" stroke="#F2F7F4" stroke-width="48" stroke-linecap="square"/>
+  <path d="M176 150h132M176 150v132M848 150H716M848 150v132" fill="none" stroke="#F2F7F4" stroke-width="40" stroke-linecap="square"/>
+</svg>
